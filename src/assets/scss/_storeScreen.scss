@@ -1,0 +1,25 @@
+.store-box-inner {
+    margin: 60px 0;
+    font-family: $font;
+
+    h3 {
+        font-size: 24px;
+    }
+
+    h4 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .store-container {
+
+        .store-content-right {
+
+            .store-actions-bar {
+                border-top: solid 2px #bababa;
+                border-bottom: solid 2px #bababa;
+                margin-bottom: 50px;
+            }
+        }
+    }
+}

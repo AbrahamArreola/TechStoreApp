@@ -1,0 +1,35 @@
+#desplegable-form {
+    position: fixed;
+    bottom: 0;
+    right: 5px;
+    z-index: 99;
+    width: 350px;
+    background-color: #faebd7;
+
+    .card {
+
+        label,
+        input,
+        span,
+        textarea {
+            font-size: 14px;
+        }
+
+        .card-header {
+            span {
+                font-size: 20px;
+            }
+
+            button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        .card-body {
+            textarea {
+                resize: none;
+            }
+        }
+    }
+}
