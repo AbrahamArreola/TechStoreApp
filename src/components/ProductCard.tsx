@@ -9,12 +9,13 @@ type ProductCardProps = {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
     return (
-        <div className="col-12 col-sm-6 col-lg-4">
+        <div className="col-12 col-sm-4">
             <div className="product-card">
                 <img src={product.img || imageNotFound} alt={product.name} />
                 <div className="info-section">
                     <h4 className="product-name">
-                        {product.name} <Link to={`/store/${product.id}`}>(View)</Link>
+                        {product.name}{" "}
+                        <Link to={`/store/products/${product.id}`}>(View)</Link>
                     </h4>
                     <span className="price-tag">$ {product.price}</span>
                 </div>

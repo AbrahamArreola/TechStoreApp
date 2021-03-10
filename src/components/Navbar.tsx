@@ -26,7 +26,7 @@ export const Navbar = () => {
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink exact to="/store" className="nav-link">
+                        <NavLink to="/store/products" className="nav-link">
                             Store
                         </NavLink>
                     </li>

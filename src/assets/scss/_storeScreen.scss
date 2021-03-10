@@ -1,24 +1,91 @@
 .store-box-inner {
     margin: 60px 0;
-    font-family: $font;
-
-    h3 {
-        font-size: 24px;
-    }
-
-    h4 {
-        font-size: 18px;
-        font-weight: 600;
-    }
 
     .store-container {
 
-        .store-content-right {
+        .store-content-left {
+            padding-bottom: 50px;
 
             .store-actions-bar {
                 border-top: solid 2px #bababa;
                 border-bottom: solid 2px #bababa;
                 margin-bottom: 50px;
+            }
+        }
+
+        .store-sidebar-right {
+            .search-product {
+                display: flex;
+                margin-bottom: 20px;
+
+                input {
+                    width: 80%;
+                    height: 42px;
+                    background-color: #666666;
+                    color: #fff;
+                    border: none;
+                    padding-left: 20px;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &::placeholder {
+                        color: #bababa;
+                    }
+                }
+
+                button {
+                    width: 20%;
+                    background-color: #333333;
+                    color: #fff;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            .title {
+                border-bottom: solid 3px #000;
+                margin-bottom: 10px;
+            }
+
+            .product-categories {
+                margin-bottom: 30px;
+
+                .categories {
+                    a {
+                        display: block;
+                        text-decoration: none;
+                        color: #000;
+                    }
+
+                    .products {
+                        margin-left: 10px;
+                        border-left: solid 1px #eaeaea;
+
+                        .product-item {
+                            position: relative;
+                            padding-left: 20px;
+
+                            p {
+                                color: #bababa;
+                                margin: 0;
+
+                                &::before {
+                                    position: absolute;
+                                    left: 0;
+                                    top: 12px;
+                                    content: '';
+                                    width: 8px;
+                                    height: 1px;
+                                    background-color: #bababa;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
