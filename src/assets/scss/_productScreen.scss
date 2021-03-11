@@ -50,12 +50,50 @@
     }
 
     .product-sidebar-right {
-        .next-previous-posts {
-            width: 100%;
-            background-color: #f6f1ff;
-            padding: 8px;
+        .container-inner {
+            background-color: #fff;
+            padding: 25px 20px;
+            margin-bottom: 30px;
 
-            
+            .categories {
+                padding-left: 15px;
+
+                .category {
+                    color: #bababa;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .related-product {
+                display: flex;
+                width: 100%;
+                margin-bottom: 20px;
+
+                .img {
+                    display: flex;
+                    width: 80px;
+
+                    img {
+                        margin: auto;
+                        width: 100%;
+                    }
+                }
+
+                .details {
+                    align-self: center;
+                    font-size: 14px;
+                    padding-left: 12px;
+                    width: 100%;
+
+                    a {
+                        font-weight: 800;
+                    }
+
+                    p {
+                        margin: 0;
+                    }
+                }
+            }
         }
     }
 }

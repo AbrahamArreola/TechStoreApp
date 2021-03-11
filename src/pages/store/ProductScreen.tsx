@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const ProductScreen = () => {
     return (
@@ -7,7 +8,10 @@ export const ProductScreen = () => {
                 <div className="row">
                     <div className="product-content-left col-lg-8">
                         <div className="product-img">
-                            <img src="https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg" alt="not found" />
+                            <img
+                                src="https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg"
+                                alt="not found"
+                            />
                             <span className="price-tag">$6000</span>
                         </div>
                         <div className="product-info">
@@ -31,9 +35,44 @@ export const ProductScreen = () => {
                         </div>
                     </div>
                     <div className="product-sidebar-right col-lg-4">
-                        <div className="next-previous-posts">
-                            <div className="previous-post"></div>
-                            <div className="next-post"></div>
+                        <div className="container-inner">
+                            <h4>Categories</h4>
+                            <hr />
+                            <div className="categories">
+                                <p className="category">- Category</p>
+                                <p className="category">- Category</p>
+                                <p className="category">- Category</p>
+                            </div>
+                        </div>
+                        <div className="container-inner">
+                            <h4>Related products</h4>
+                            <hr />
+                            <div className="related-product">
+                                <div className="img">
+                                    <img
+                                        src="https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg"
+                                        alt="product"
+                                    />
+                                </div>
+                                <div className="details">
+                                    <Link to="#">Hello</Link>
+                                    <p>$6000</p>
+                                </div>
+                            </div>
+                            <div className="related-product">
+                                <div className="img">
+                                    <img
+                                        src="https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg"
+                                        alt="product"
+                                    />
+                                </div>
+                                <div className="details">
+                                    <Link to="#">
+                                        Hello this is some large text hello
+                                    </Link>
+                                    <p>$6000</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,7 @@ export const StoreScreen = () => {
         { id: 5, name: "Mobile", price: 6000 },
     ]);
 
-    const [value, setValue] = React.useState<number[]>([10, 30]);
+    const [value, setValue] = useState<number[]>([10, 30]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
         setValue(newValue as number[]);
