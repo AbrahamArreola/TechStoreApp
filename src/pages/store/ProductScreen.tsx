@@ -36,11 +36,9 @@ export const ProductScreen = () => {
                     </div>
                     <div className="product-sidebar-right col-lg-4">
                         <div className="container-inner">
-                            <h4>Categories</h4>
+                            <h4>Category</h4>
                             <hr />
                             <div className="categories">
-                                <p className="category">- Category</p>
-                                <p className="category">- Category</p>
                                 <p className="category">- Category</p>
                             </div>
                         </div>

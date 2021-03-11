@@ -27,6 +27,9 @@
         }
 
         .card-body {
+            max-height: 502px;
+            overflow-y: auto;
+
             textarea {
                 resize: none;
             }

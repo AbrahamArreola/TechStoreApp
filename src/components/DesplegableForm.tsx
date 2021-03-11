@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 interface IFormInput {
     nameInput: string;
     priceInput: number;
+    categoryInput: string;
     descriptionText: string;
     imageInput: FileList;
 }
@@ -100,6 +101,32 @@ export const DesplegableForm = () => {
                                         errors.priceInput.message}
                                 </span>
                             </div>
+
+                            <div className="form-group">
+                                <label htmlFor="product-name">Category</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="product-category"
+                                    name="categoryInput"
+                                    list="categories"
+                                    ref={register({
+                                        required: {
+                                            value: true,
+                                            message: "category required",
+                                        },
+                                    })}
+                                />
+                                <datalist id="categories">
+                                    <option value="category1"></option>
+                                    <option value="category2"></option>
+                                </datalist>
+                                <span className="text-danger">
+                                    {errors.categoryInput &&
+                                        errors.categoryInput.message}
+                                </span>
+                            </div>
+
                             <div className="form-group">
                                 <label htmlFor="product-description">
                                     Description
@@ -138,7 +165,9 @@ export const DesplegableForm = () => {
                                 />
                             </div>
                             <hr />
-                            <button type="submit" className="btn btn-primary">submit</button>   
+                            <button type="submit" className="btn btn-primary">
+                                submit
+                            </button>
                         </form>
                     </div>
                 </div>
