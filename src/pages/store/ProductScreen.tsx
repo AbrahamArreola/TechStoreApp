@@ -1,7 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useParams } from "react-router-dom";
+import useSWR from "swr";
+
+const api = process.env.REACT_APP_API_URL;
 
 export const ProductScreen = () => {
+    const productId = useParams<{ id: string }>();
+
+    const { error, data } = useSWR(`${api}/products/${productId.id}`);
+
+    if (error) {
+        return <p>There was an error!</p>;
+    }
+
+    if (!data) {
+        return <p>loading...</p>;
+    }
+
+    if (!data.product) {
+        return <Redirect to="/store/products" />;
+    }
+
     return (
         <div className="product-box-inner row justify-content-center">
             <div className="col-10 col-sm-8 col-lg-10">
@@ -9,21 +28,16 @@ export const ProductScreen = () => {
                     <div className="product-content-left col-lg-8">
                         <div className="product-img">
                             <img
-                                src="https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg"
-                                alt="not found"
+                                src={data.product.img}
+                                alt={data.product.name}
                             />
-                            <span className="price-tag">$6000</span>
+                            <span className="price-tag">
+                                ${data.product.price}
+                            </span>
                         </div>
                         <div className="product-info">
-                            <h2>Title</h2>
-                            <p>
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Quas iste fugiat laborum
-                                doloribus voluptatem, deleniti voluptates
-                                voluptas. Ipsam deserunt tempora, molestiae
-                                porro fuga dolor? Fuga quos voluptate assumenda
-                                soluta debitis.
-                            </p>
+                            <h2>{data.product.name}</h2>
+                            <p>{data.product.description}</p>
                             <div className="product-options">
                                 <span className="rating">
                                     <i className="fas fa-star"></i> Rate: 4.5

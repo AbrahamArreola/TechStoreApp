@@ -1,6 +1,7 @@
 import { Slider } from "@material-ui/core";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useSWR from "swr";
 import { DesplegableForm } from "../../components/DesplegableForm";
 import { ProductCard } from "../../components/ProductCard";
 
@@ -23,26 +24,24 @@ const marks = [
     },
 ];
 
+const api = process.env.REACT_APP_API_URL;
+
 export const StoreScreen = () => {
-    const [products, setProducts] = useState<IProduct[] | []>([
-        {
-            id: 1,
-            name: "Computer",
-            price: 12000,
-            img:
-                "https://cdn.britannica.com/77/170477-050-1C747EE3/Laptop-computer.jpg",
-        },
-        { id: 2, name: "Mobile", price: 6000 },
-        { id: 3, name: "Mobile", price: 6000 },
-        { id: 4, name: "Mobile", price: 6000 },
-        { id: 5, name: "Mobile", price: 6000 },
-    ]);
+    const { error, data } = useSWR(`${api}/products`);
 
     const [value, setValue] = useState<number[]>([10, 30]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
         setValue(newValue as number[]);
     };
+
+    if (error) {
+        return <p>There was an error!</p>;
+    }
+
+    if (!data) {
+        return <p>loading...</p>;
+    }
 
     return (
         <div className="store-box-inner row justify-content-center">
@@ -55,7 +54,10 @@ export const StoreScreen = () => {
                         </div>
 
                         <div className="store-products row">
-                            {products.map((product: IProduct) => (
+                            {data.products.length === 0 && (
+                                <p>There aren't products to show</p>
+                            )}
+                            {data.products.map((product: IProduct) => (
                                 <ProductCard
                                     key={product.id}
                                     product={product}
