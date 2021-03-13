@@ -33,6 +33,13 @@
             textarea {
                 resize: none;
             }
+
+            button{
+                .spinner-border{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
         }
     }
 }

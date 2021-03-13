@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { createProduct } from "../services/product-services";
 
-interface IFormInput {
+export interface IFormInput {
     nameInput: string;
     priceInput: number;
     categoryInput: string;
@@ -11,10 +12,26 @@ interface IFormInput {
 
 export const DesplegableForm = () => {
     const [formExpanded, setFormExpanded] = useState<boolean>(false);
+    const [sendingForm, setSendingForm] = useState<boolean>(false);
     const { register, handleSubmit, errors } = useForm<IFormInput>();
 
-    const onSubmit = (data: IFormInput) => {
-        console.log(data);
+    const onSubmit = async (data: IFormInput) => {
+        setSendingForm(true);
+        try {
+            const formData = new FormData();
+            formData.append("name", data.nameInput);
+            formData.append("price", String(data.priceInput));
+            formData.append("description", data.descriptionText);
+            formData.append("image", data.imageInput[0]);
+
+            const response = await createProduct(formData);
+
+            setSendingForm(false);
+            console.log(response);
+        } catch (error) {
+            setSendingForm(false);
+            console.log(error);
+        }
     };
 
     return (
@@ -165,8 +182,19 @@ export const DesplegableForm = () => {
                                 />
                             </div>
                             <hr />
-                            <button type="submit" className="btn btn-primary">
-                                submit
+                            <button type="submit" className="btn btn-primary" disabled={sendingForm}>
+                                {sendingForm ? (
+                                    <div
+                                        className="spinner-border text-light"
+                                        role="status"
+                                    >
+                                        <span className="sr-only">
+                                            Loading...
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <span>Submit</span>
+                                )}
                             </button>
                         </form>
                     </div>
