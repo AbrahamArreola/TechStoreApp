@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { mutate } from "swr";
 import { createProduct } from "../services/product-services";
 
 export interface IFormInput {
@@ -10,10 +11,13 @@ export interface IFormInput {
     imageInput: FileList;
 }
 
+const api = process.env.REACT_APP_API_URL;
+
 export const DesplegableForm = () => {
     const [formExpanded, setFormExpanded] = useState<boolean>(false);
     const [sendingForm, setSendingForm] = useState<boolean>(false);
-    const { register, handleSubmit, errors } = useForm<IFormInput>();
+    const { register, handleSubmit, errors, reset } = useForm<IFormInput>();
+    const toggleButton = useRef<HTMLButtonElement>(null);
 
     const onSubmit = async (data: IFormInput) => {
         setSendingForm(true);
@@ -24,10 +28,14 @@ export const DesplegableForm = () => {
             formData.append("description", data.descriptionText);
             formData.append("image", data.imageInput[0]);
 
-            const response = await createProduct(formData);
+            const resp = await createProduct(formData);
+            console.log(resp);
 
+            mutate(`${api}/products`);
             setSendingForm(false);
-            console.log(response);
+            reset();
+            setFormExpanded(false);
+            toggleButton.current?.click();
         } catch (error) {
             setSendingForm(false);
             console.log(error);
@@ -40,11 +48,10 @@ export const DesplegableForm = () => {
                 <div className="card-header" id="headingOne">
                     <h5 className="mb-0">
                         <button
+                            ref={toggleButton}
                             className="btn"
                             data-toggle="collapse"
                             data-target="#collapseOne"
-                            aria-expanded="true"
-                            aria-controls="collapseOne"
                             onClick={() => setFormExpanded(!formExpanded)}
                         >
                             <span>Add product </span>
@@ -62,7 +69,6 @@ export const DesplegableForm = () => {
                 <div
                     id="collapseOne"
                     className="collapse"
-                    aria-labelledby="headingOne"
                     data-parent="#desplegable-form"
                 >
                     <div className="card-body">
@@ -182,7 +188,11 @@ export const DesplegableForm = () => {
                                 />
                             </div>
                             <hr />
-                            <button type="submit" className="btn btn-primary" disabled={sendingForm}>
+                            <button
+                                type="submit"
+                                className="btn btn-primary"
+                                disabled={sendingForm}
+                            >
                                 {sendingForm ? (
                                     <div
                                         className="spinner-border text-light"

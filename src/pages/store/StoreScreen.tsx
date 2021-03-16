@@ -54,10 +54,10 @@ export const StoreScreen = () => {
                         </div>
 
                         <div className="store-products row">
-                            {data.products.length === 0 && (
+                            {data.products?.length === 0 && (
                                 <p>There aren't products to show</p>
                             )}
-                            {data.products.map((product: IProduct) => (
+                            {data.products?.map((product: IProduct) => (
                                 <ProductCard
                                     key={product.id}
                                     product={product}
