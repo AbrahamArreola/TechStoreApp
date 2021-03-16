@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useSWR from "swr";
 import { DesplegableForm } from "../../components/DesplegableForm";
 import { ProductCard } from "../../components/ProductCard";
+import { StoreSkeleton } from "../skeletons/StoreSkeleton";
 
 export interface IProduct {
     id: number;
@@ -40,7 +41,7 @@ export const StoreScreen = () => {
     }
 
     if (!data) {
-        return <p>loading...</p>;
+        return <StoreSkeleton />;
     }
 
     return (

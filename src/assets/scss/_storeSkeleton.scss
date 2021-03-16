@@ -1,0 +1,19 @@
+.store-skeleton {
+    margin-top: 60px;
+
+    .MuiSkeleton-text {
+        transform: none;
+    }
+
+    .store-container {
+        .store-content-left {
+            .skeleton-bar {
+                margin-bottom: 50px;
+            }
+
+            .store-products .skeleton-card {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
