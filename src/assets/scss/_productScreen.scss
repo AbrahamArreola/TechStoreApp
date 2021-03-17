@@ -1,3 +1,16 @@
+.product-loading-screen {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .circular-loading {
+        position: absolute;
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
 .product-box-inner {
     margin: 60px 0;
 

@@ -1,3 +1,4 @@
+import { CircularProgress } from "@material-ui/core";
 import React from "react";
 import { Link, Redirect, useParams } from "react-router-dom";
 import useSWR from "swr";
@@ -14,7 +15,11 @@ export const ProductScreen = () => {
     }
 
     if (!data) {
-        return <p>loading...</p>;
+        return (
+            <div className="product-loading-screen">
+                <CircularProgress className="circular-loading" />
+            </div>
+        );
     }
 
     if (!data.product) {
