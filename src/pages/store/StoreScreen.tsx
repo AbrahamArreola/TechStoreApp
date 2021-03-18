@@ -1,5 +1,5 @@
 import { Slider } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
 import { DesplegableForm } from "../../components/DesplegableForm";
@@ -10,8 +10,15 @@ export interface IProduct {
     id: number;
     name: string;
     price: number;
+    categoryId: number;
     description?: string;
     img?: string;
+}
+
+interface ICategory {
+    id: number;
+    name: string;
+    products: IProduct[];
 }
 
 const marks = [
@@ -28,7 +35,12 @@ const marks = [
 const api = process.env.REACT_APP_API_URL;
 
 export const StoreScreen = () => {
-    const { error, data } = useSWR(`${api}/products`);
+    const { error: productsError, data: productsData } = useSWR(
+        `${api}/products`
+    );
+    const { error: categoriesError, data: categoriesData } = useSWR(
+        `${api}/categories`
+    );
 
     const [value, setValue] = useState<number[]>([10, 30]);
 
@@ -36,11 +48,11 @@ export const StoreScreen = () => {
         setValue(newValue as number[]);
     };
 
-    if (error) {
+    if (productsError || categoriesError) {
         return <p>There was an error!</p>;
     }
 
-    if (!data) {
+    if (!productsData || !categoriesData) {
         return <StoreSkeleton />;
     }
 
@@ -55,10 +67,10 @@ export const StoreScreen = () => {
                         </div>
 
                         <div className="store-products row">
-                            {data.products?.length === 0 && (
+                            {productsData.products?.length === 0 && (
                                 <p>There aren't products to show</p>
                             )}
-                            {data.products?.map((product: IProduct) => (
+                            {productsData.products?.map((product: IProduct) => (
                                 <ProductCard
                                     key={product.id}
                                     product={product}
@@ -81,21 +93,44 @@ export const StoreScreen = () => {
                                 <h4>Categories</h4>
                             </div>
                             <div id="categories" className="categories">
-                                <Link
-                                    to="#"
-                                    data-toggle="collapse"
-                                    data-target="#products"
-                                >
-                                    Some category
-                                </Link>
-                                <div
-                                    className="products collapse"
-                                    id="products"
-                                >
-                                    <div className="product-item">
-                                        <p>Hello</p>
-                                    </div>
-                                </div>
+                                {categoriesData.categories?.length === 0 && (
+                                    <p>There aren't categories to show</p>
+                                )}
+                                {categoriesData.categories?.map(
+                                    (category: ICategory) => (
+                                        <Fragment key={category.id}>
+                                            <Link
+                                                to="#"
+                                                data-toggle="collapse"
+                                                data-target={`#${category.name}`}
+                                            >
+                                                {category.name}
+                                            </Link>
+
+                                            <div
+                                                key={category.id}
+                                                className="products collapse"
+                                                id={`${category.name}`}
+                                            >
+                                                <div className="product-item">
+                                                    {category.products.map(
+                                                        (product: IProduct) => (
+                                                            <p key={product.id}>
+                                                                <Link
+                                                                    to={`/store/products/${product.id}/${product.categoryId}`}
+                                                                >
+                                                                    {
+                                                                        product.name
+                                                                    }
+                                                                </Link>
+                                                            </p>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </Fragment>
+                                    )
+                                )}
                             </div>
                         </div>
                         <div className="price-selector">

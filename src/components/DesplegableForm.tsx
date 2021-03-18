@@ -25,6 +25,7 @@ export const DesplegableForm = () => {
             const formData = new FormData();
             formData.append("name", data.nameInput);
             formData.append("price", String(data.priceInput));
+            formData.append("category", data.categoryInput);
             formData.append("description", data.descriptionText);
             formData.append("image", data.imageInput[0]);
 
@@ -32,6 +33,7 @@ export const DesplegableForm = () => {
             console.log(resp);
 
             mutate(`${api}/products`);
+            mutate(`${api}/categories`);
             setSendingForm(false);
             reset();
             setFormExpanded(false);

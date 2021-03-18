@@ -15,7 +15,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 <div className="info-section">
                     <h4 className="product-name">
                         {product.name}{" "}
-                        <Link to={`/store/products/${product.id}`}>(View)</Link>
+                        <Link
+                            to={`/store/products/${product.id}/${product.categoryId}`}
+                        >
+                            (View)
+                        </Link>
                     </h4>
                     <span className="price-tag">$ {product.price}</span>
                 </div>

@@ -28,7 +28,7 @@ function App() {
                         />
                         <Route
                             exact
-                            path="/store/products/:id"
+                            path="/store/products/:id/:categoryId"
                             component={ProductScreen}
                         />
                     </Switch>

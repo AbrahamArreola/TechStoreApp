@@ -63,24 +63,32 @@
 
                     .products {
                         margin-left: 10px;
-                        border-left: solid 1px #eaeaea;
+                        border-left: solid 1px #bababa;
 
                         .product-item {
                             position: relative;
                             padding-left: 20px;
 
                             p {
-                                color: #bababa;
                                 margin: 0;
 
                                 &::before {
                                     position: absolute;
                                     left: 0;
-                                    top: 12px;
+                                    margin-top: 10px;
                                     content: '';
                                     width: 8px;
                                     height: 1px;
                                     background-color: #bababa;
+                                }
+
+                                a {
+                                    font-size: 14px;
+                                    color: #bababa;
+
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
                                 }
                             }
                         }
